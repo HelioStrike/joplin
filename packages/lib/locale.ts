@@ -553,7 +553,9 @@ function supportedLocalesToLanguages(options: SupportedLocalesToLanguagesOptions
 
 function closestSupportedLocale(canonicalName: string, defaultToEnglish = true, locales: string[] = null) {
 	locales = locales === null ? supportedLocales() : locales;
-	if (locales.indexOf(canonicalName) >= 0) return canonicalName;
+
+	const normalizedName = canonicalName.replace('-', '_');
+	if (locales.indexOf(normalizedName) >= 0) return normalizedName;
 
 	const requiredLanguage = languageCodeOnly(canonicalName).toLowerCase();
 
